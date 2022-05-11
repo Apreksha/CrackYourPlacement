@@ -1,0 +1,15 @@
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int j=0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]!=0)
+                swap(nums[i],nums[j++]);
+        }
+    }
+};
+
+
+Concept:
+Keep a pointer at start of the array and whenever you come across a non-zero number, swap it with that pointer and increment the pointer.
+This way all zeros will be at the end of the array.
