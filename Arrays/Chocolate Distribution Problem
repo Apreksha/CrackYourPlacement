@@ -1,0 +1,9 @@
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+        long long d,result=INT_MAX;
+        sort(a.begin(),a.end());
+        for(long long i=0;i<n-m+1;i++){
+            d=a[i+m-1]-a[i];
+            result=min(result,d);
+        }
+        return result;
+    }   
