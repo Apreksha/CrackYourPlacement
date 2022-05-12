@@ -1,0 +1,121 @@
+class Solution {
+public:
+        string ten(int n){
+        switch(n){
+            case 2: return "Twenty";
+            case 3: return "Thirty";
+            case 4: return "Forty";
+            case 5: return "Fifty";
+            case 6: return "Sixty";
+            case 7: return "Seventy";
+            case 8: return "Eighty";
+            case 9: return "Ninety";
+        }
+        return "";
+    }
+    
+    string one(int n){
+        switch(n){
+            case 1: return "One";
+            case 2: return "Two";
+            case 3: return "Three";
+            case 4: return "Four";
+            case 5: return "Five";
+            case 6: return "Six";
+            case 7: return "Seven";
+            case 8: return "Eight";
+            case 9: return "Nine";
+        }
+        return "";
+    }
+    
+    string lessThan20(long n){
+        switch(n){
+            case 10: return "Ten";
+            case 11: return "Eleven";
+            case 12: return "Twelve";
+            case 13: return "Thirteen";
+            case 14: return "Fourteen";
+            case 15: return "Fifteen";
+            case 16: return "Sixteen";
+            case 17: return "Seventeen";
+            case 18: return "Eighteen";
+            case 19: return "Nineteen";
+        }
+        return "";
+    }
+    string two(long n,long num){
+        string ans;
+        if(n==0)    return "";
+        if(n<10 && num>100)    return ans+one(n);
+        else if(n<10)    return one(n);
+        if(n<20 && num>100)    return ans+lessThan20(n);
+        else if(n<20)    return lessThan20(n);
+        int tenner=n/10;
+        int res=n%10;
+        if(num>100){
+            if(tenner!=0 && res!=0)
+                return ans+ten(tenner)+" "+one(res);
+            if(tenner!=0)
+                return ans+ten(tenner);
+            if(res!=0)
+                return ans+one(res);    
+            return ans;
+        }
+        else{
+            if(tenner!=0 && res!=0)
+                return ten(tenner)+" "+one(res);
+            if(tenner!=0)
+                return ten(tenner);
+            if(res!=0)
+                return one(res);
+        }
+        return ans;
+    }
+    
+    string three(long n,long num){
+        if(n==0)    return "";
+        int hundred=n/100;
+        int res=n%100;
+        if(res!=0 && hundred!=0)
+            return one(hundred)+" Hundred "+two(res,num);
+        else if(res==0)
+            return one(hundred)+" Hundred";
+        else
+            return two(res,num);
+    }
+    
+    string numberToWords(int n) {
+        if(n==0)    
+            return "Zero";
+        long num=n;
+        int billion=n/1000000000;
+        n%=1000000000;
+        int million=n/1000000;
+        n%=1000000;
+        int thousand=n/1000;
+        n%=1000;
+        string ans="";
+        if(billion!=0){
+            if(ans.length()!=0)
+                ans+=" ";
+            ans+=three(billion,0)+" Billion";
+        }
+        if(million!=0){
+            if(ans.length()!=0)
+                ans+=" ";
+            ans+=three(million,0)+" Million";
+        }
+        if(thousand!=0){
+            if(ans.length()!=0)
+                ans+=" ";
+            ans+=three(thousand,0)+" Thousand";
+        }
+        if(n!=0){
+            if(ans.length()!=0)
+                ans+=" ";
+            ans+=three(n,num);
+        }
+        return ans;
+    }
+};
