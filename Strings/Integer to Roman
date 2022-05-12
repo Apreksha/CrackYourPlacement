@@ -1,0 +1,61 @@
+class Solution {
+public:
+       string intToRoman(int n) {
+        string ans="";
+        while(n>0){
+            if(n>=1000){
+                ans.push_back('M');
+                n-=1000;
+            }
+            else if(n>=900){
+                ans+="CM";
+                n-=900;
+            }
+            else if(n>=500){
+                ans.push_back('D');
+                n-=500;
+            }
+            else if(n>=400){
+                ans+="CD";
+                n-=400;
+            }
+            else if(n>=100){
+                ans.push_back('C');
+                n-=100;
+            }
+            else if(n>=90){
+                ans+="XC";
+                n-=90;
+            }
+            else if(n>=50){
+                ans.push_back('L');
+                n-=50;
+            }
+            else if(n>=40){
+                ans+="XL";
+                n-=40;
+            }
+            else if(n>=10){
+                ans.push_back('X');
+                n-=10;
+            }
+            else if(n>=9){
+                ans+="IX";
+                n-=9;
+            }
+            else if(n>=5){
+                ans.push_back('V');
+                n-=5;
+            }
+            else if(n>=4){
+                ans+="IV";
+                n-=4;
+            }
+            else{
+                ans.push_back('I');
+                n-=1;
+            }            
+        }
+        return ans;
+    }
+};
