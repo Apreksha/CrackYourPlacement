@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int j=1;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]!=nums[i-1]){
+                nums[j]=nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+};
+
+
+Start from index 1 and check if the current element is not to the previous element, it means it should be a part of the required array.
+So assign nums at j index the value of nums at current index i and increment j
+In the end, return j
