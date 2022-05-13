@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        string ans,temp;
+        int n=s.length();
+        for(int i=n-1;i>=-1;i--){
+            if(i==-1){
+                reverse(temp.begin(),temp.end());
+                ans+=temp;
+            }
+            else if(s[i]==' ' && temp!=""){
+                reverse(temp.begin(),temp.end());
+                ans+=temp;
+                ans.push_back(' ');
+                temp="";
+            }
+            else if(s[i]!=' ')
+                temp.push_back(s[i]);
+        }
+        if(ans[ans.length()-1]==' ')
+            ans.pop_back();
+        return ans;
+    }
+};
