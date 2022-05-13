@@ -1,0 +1,33 @@
+string smallestWindow (string s, string p){
+        // Your code here
+        int start=0,end=0,match=0,minlength=INT_MAX,substr_start=0;
+        int m[256]={0};
+        
+        for(int i=0;i<p.length();i++){
+            if(m[p[i]]==0)
+                match++;
+            m[p[i]]++;
+        }
+        
+        for(end=0;end<s.length();end++){
+            m[s[end]]--;
+            
+            if(m[s[end]]==0)
+                match--;
+            
+            while(match==0){
+                if(minlength > end-start+1){
+                    minlength = end-start+1;
+                    substr_start=start;
+                }
+                m[s[start]]++;
+                if(m[s[start]]>0)
+                    match++;
+                start++;
+            }
+        }
+        
+        if(minlength != INT_MAX)
+            return s.substr(substr_start,minlength);
+        return "-1";
+    }
