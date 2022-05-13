@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int calculate(string s) {
+        int temp=0,ans=0,n=s.length();
+        stack<int>st;
+        char sign='+';
+        
+        for(int i=0;i<n;i++){
+            if(isdigit(s[i]))
+                temp=temp*10 + (s[i]-'0');
+                
+            if((!isdigit(s[i]) && !isspace(s[i])) || i==n-1){
+                if(sign=='+')
+                    st.push(temp);
+                
+                else if(sign=='-')
+                    st.push(-temp);
+                
+                else{
+                    int num;
+                    
+                    if(sign == '*')
+                        num=st.top() * temp;
+                    else 
+                        num=st.top() / temp;
+                    
+                    st.pop();
+                    st.push(num);
+                }
+                temp=0;
+                sign=s[i];
+            }
+        }
+        
+        while(!st.empty()){
+            ans+=st.top();
+            cout<<ans<<" ";
+            st.pop();
+        }
+        return ans;
+    }
+};
