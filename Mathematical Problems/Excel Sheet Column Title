@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        char a[]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
+        'Q','R','S','T','U','V','W','X','Y','Z'};
+        
+        string s="";
+        if(columnNumber<27)
+            s=a[columnNumber-1];
+        else{
+            while(columnNumber>0){
+                int c=columnNumber%26;
+                columnNumber=columnNumber/26;
+                if(c==0){
+                    s.push_back('Z');
+                    columnNumber--;
+                }
+                else
+                    s.push_back(a[c-1]);
+            }
+        }
+        reverse(s.begin(),s.end());
+        return s;
+    }
+};
