@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int kthFactor(int n, int k) {
+        set<int>s;
+        for(int i=1;i<=sqrt(n);i++){
+            if(n%i == 0 ){
+                s.insert(i);
+                s.insert(n/i);
+            }
+        }
+        set<int>::iterator it;
+        
+        for (it = s.begin(); it != s.end(); it++) {
+            //cout<<*it<<" ";
+            k--;
+            if(k==0)
+                return *it;
+        }
+        return -1;
+    }
+};
