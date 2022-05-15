@@ -1,0 +1,63 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode *list3=NULL,*t3=NULL;
+        if(list2==NULL)
+            return list1;
+        if(list1==NULL)
+            return list2;
+        while(list1!=NULL && list2!=NULL){
+            if(list1->val<list2->val){
+                ListNode *newnode=new ListNode(list1->val);
+                if(list3==NULL)
+                    list3=t3=newnode;
+                t3->next=newnode;
+                t3=t3->next;
+                list1=list1->next;
+            }
+            else if(list2->val < list1->val){
+                ListNode *newnode=new ListNode(list2->val);
+                if(list3==NULL)
+                    list3=t3=newnode;
+                t3->next=newnode;
+                t3=t3->next;
+                list2=list2->next;
+            }
+            else{
+                ListNode *newnode=new ListNode(list1->val);
+                if(list3==NULL)
+                    list3=t3=newnode;
+                t3->next=newnode;
+                t3=t3->next;
+                ListNode *newnode1=new ListNode(list1->val);
+                t3->next=newnode1;
+                t3=t3->next;
+                list1=list1->next;
+                list2=list2->next;
+            }
+        }
+        while (list1!=NULL){
+            ListNode *newnode=new ListNode(list1->val);
+            t3->next=newnode;
+            t3=t3->next;
+            list1=list1->next;
+        }
+        while(list2!=NULL){
+            ListNode *newnode=new ListNode(list2->val);
+            t3->next=newnode;
+            t3=t3->next;
+            list2=list2->next;
+        }
+        return list3;
+    }
+};
