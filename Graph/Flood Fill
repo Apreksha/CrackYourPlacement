@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void dfs(int sr,int sc,int oldcolor, int newcolor, vector<vector<int>>& image, vector<vector<bool>>&visited, int n, int m){
+        if(sr>=n || sc>=m || sr<0 || sc<0)
+            return;
+        if(image[sr][sc]!=oldcolor)
+            return;
+        
+        if(!visited[sr][sc]){
+            visited[sr][sc]=true;
+            image[sr][sc]=newcolor;
+            dfs(sr+1,sc,oldcolor,newcolor,image,visited,n,m);
+            dfs(sr-1,sc,oldcolor,newcolor,image,visited,n,m);
+            dfs(sr,sc+1,oldcolor,newcolor,image,visited,n,m);
+            dfs(sr,sc-1,oldcolor,newcolor,image,visited,n,m);
+        }
+    }
+    
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newcolor) {
+        int oldcolor=image[sr][sc];
+        int n=image.size(), m=image[0].size();
+        vector<vector<bool>>visited(image.size(),vector<bool>(image[0].size(),false));
+        
+        dfs(sr,sc,oldcolor,newcolor,image,visited,n,m);
+        return image;
+    }
+};
