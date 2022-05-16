@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    void dfs(int i,vector<int> adj[],vector<bool> &visited,vector<int>&ans){
+        visited[i]=true;
+        ans.push_back(i);
+        
+        for(auto it:adj[i]){
+            if(!visited[it])
+                dfs(it,adj,visited,ans);
+        }
+    }
+    
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+        vector<int>ans;
+        vector<bool> visited(V,0);
+        
+        dfs(0,adj,visited,ans);
+        return ans;
+    }
+};
