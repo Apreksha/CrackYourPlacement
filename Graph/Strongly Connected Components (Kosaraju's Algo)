@@ -1,0 +1,48 @@
+	void dfs(int node, vector<bool> &visited, stack<int> &st, vector<int>adj[]){
+	    visited[node]=true;
+	    
+	    for(auto it: adj[node]){
+	        if(!visited[it])
+	            dfs(it, visited, st, adj);
+	    }
+	    st.push(node);
+	}
+	
+	void revdfs(int node, vector<bool> &visited, vector<int>reverse[]){
+	    visited[node]=true;
+	    
+	    for(auto it: reverse[node]){
+	        if(!visited[it])
+	            revdfs(it, visited, reverse);
+	    }
+	}
+	
+    int kosaraju(int V, vector<int> adj[]){
+        //code here
+        stack<int>st;
+        vector<bool> visited(V,false);
+        
+        for(int i=0;i<V;i++){
+            if(!visited[i])
+                dfs(i,visited,st,adj);
+        }
+        
+        vector<int>reverse[V];
+        
+        for(int i=0;i<V;i++){
+            visited[i]=false;
+            for(auto it:adj[i])
+                reverse[it].push_back(i);
+        }
+        int c=0;
+        
+        while(!st.empty()){
+            int node=st.top();
+            st.pop();
+            if(!visited[node]){
+                revdfs(node,visited,reverse);
+                c++;
+            }
+        }
+        return c;
+    }
