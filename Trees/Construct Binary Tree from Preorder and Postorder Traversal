@@ -1,0 +1,28 @@
+class Solution {
+public:
+    TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
+        stack<pair<int, TreeNode *> > st;
+        int j;
+        TreeNode *root = new TreeNode(preorder[0]);
+        st.push(make_pair(0, root));
+        for(int i = postorder.size()-2; i >= 0; i--) {
+            for(j = 1; j < preorder.size(); j++) {
+                if(preorder[j] == postorder[i]) {
+                    break;
+                }
+            }
+            TreeNode *temp = new TreeNode(preorder[j]);;
+            while(st.top().first > j) {
+                st.pop();
+            }
+            if(!st.top().second->right) {
+                st.top().second->right = new TreeNode(preorder[j]);
+                st.push(make_pair(j, st.top().second->right));
+            } else {
+                st.top().second->left = temp;
+                st.push(make_pair(j, temp));
+            }
+        }
+        return root;
+    }
+};
