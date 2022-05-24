@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int buy=INT_MAX,sell=-1,maxprofit=0;
+        
+        for(int i:prices){
+            if(i<buy)
+                buy=i;
+            else if (buy<sell && sell==-1)
+                sell=i;
+            else{
+                int profit=sell-buy;
+                maxprofit+=profit;
+                sell=-1;
+            }
+        }
+        return maxprofit;
+    }
+};
