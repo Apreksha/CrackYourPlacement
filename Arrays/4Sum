@@ -1,0 +1,39 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        unordered_set<string>s;
+        vector<vector<int>>ans;
+        for(int i=0;i<n-3;i++){
+            for(int j=i+1;j<n-2;j++){
+                int l=j+1,m=n-1,rem=target-nums[i]-nums[j];
+                while(l<m){
+                    if(rem==nums[l]+nums[m]){
+                        vector<int>t;
+                        string check;
+                        check+=(nums[i]);
+                        check+=(nums[j]);
+                        check+=(nums[l]);
+                        check+=(nums[m]);
+                        if(s.find(check)==s.end()){
+                            s.insert(check);
+                            t.push_back(nums[i]);
+                            t.push_back(nums[j]);
+                            t.push_back(nums[l]);
+                            t.push_back(nums[m]);
+                            ans.push_back(t);
+                        }
+                        l++;
+                        m--;
+                    }
+                    else if(rem>nums[l]+nums[m])
+                        l++;
+                    else
+                        m--;
+                }
+            }
+        }
+        return ans;
+    }
+};
