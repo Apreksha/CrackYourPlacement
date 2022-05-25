@@ -1,0 +1,23 @@
+class Solution {
+public:
+    
+    void helper(vector<string>&v,int n,int openbracket,int closebracket,string s){
+        if(openbracket==n && closebracket==n){
+            v.push_back(s);
+            return;
+        }
+        
+        if(openbracket<n)
+            helper(v,n,openbracket+1,closebracket,s+"(");
+        
+        if(closebracket < openbracket)
+            helper(v,n,openbracket,closebracket+1,s+")");
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        vector<string>v;
+        int openbracket=0, closebracket=0;
+        helper(v,n,openbracket,closebracket,"");
+        return v;
+    }
+};
