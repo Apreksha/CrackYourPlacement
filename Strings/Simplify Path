@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+
+        for(int i=0;i<path.length();i++){
+            if(path[i]=='/' && path[i+1]=='/'){
+                path.erase(path.begin()+i);
+                i++;
+            }    
+            else if(path[i]=='.' && path[i+1]=='.' && path[i+2]=='.'){
+                i=i+2;
+                continue;
+            }
+            else if(path[i]=='.' && path[i+1]=='.'){
+                int j=i-1,count_of_slash=0;
+                
+                while(j>=0 && count_of_slash<2){
+                    if(path[j]=='/')
+                        count_of_slash++;
+                    j--;
+                }
+                path.erase(j+1,i-j+1);
+                i++;
+            }
+            
+            else if(path[i]=='.' && path[i+1]!='.'){
+                path.erase(i,2);
+            }
+        }
+        
+        if(path[path.length()-1]=='/')
+            path.pop_back();
+        return path;
+    }
+};
